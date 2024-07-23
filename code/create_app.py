@@ -6,6 +6,7 @@ import functools
 import json
 import logging
 import mimetypes
+
 from os import path
 import sys
 import requests
@@ -319,10 +320,6 @@ def create_app():
     mimetypes.add_type("text/css", ".css")
 
     sys.path.append(path.join(path.dirname(__file__), ".."))
-
-    load_dotenv(
-        path.join(path.dirname(__file__), "..", "..", ".env")
-    )  # Load environment variables from .env file
 
     app = Flask(__name__)
     env_helper: EnvHelper = EnvHelper()
