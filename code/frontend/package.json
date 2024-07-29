@@ -19,7 +19,7 @@
         "lodash": "^4.17.21",
         "lodash-es": "^4.17.21",
         "microsoft-cognitiveservices-speech-sdk": "^1.38.0",
-        "postcss": "^8.4.39",
+        "postcss": "^8.4.40",
         "react": "^18.2.0",
         "react-dom": "^18.3.1",
         "react-markdown": "^9.0.1",
@@ -37,8 +37,8 @@
         "@types/uuid": "^10.0.0",
         "@vitejs/plugin-react": "^4.3.1",
         "prettier": "^3.3.3",
-        "typescript": "^5.5.3",
-        "vite": "^5.3.4",
+        "typescript": "^5.5.4",
+        "vite": "^5.3.5",
         "vitest": "^2.0.4"
     }
 }
