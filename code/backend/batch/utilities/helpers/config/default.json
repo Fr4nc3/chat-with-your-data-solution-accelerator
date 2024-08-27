@@ -139,7 +139,7 @@
     "log_tokens": true
   },
   "chat_history": {
-    "chat_history_on": false
+    "chat_history_on": true
   },
   "orchestrator": {
     "strategy": "${ORCHESTRATION_STRATEGY}"
