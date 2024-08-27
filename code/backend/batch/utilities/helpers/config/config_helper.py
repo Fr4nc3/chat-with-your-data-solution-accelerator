@@ -25,6 +25,7 @@ class Config:
         self.messages = Messages(config["messages"])
         self.example = Example(config["example"])
         self.logging = Logging(config["logging"])
+        self.chat_history = Chat_History(config["chat_history"])
         self.document_processors = [
             EmbeddingConfig(
                 document_type=c["document_type"],
@@ -121,6 +122,9 @@ class Logging:
         self.log_user_interactions = logging["log_user_interactions"]
         self.log_tokens = logging["log_tokens"]
 
+class Chat_History:
+    def __init__(self, chat_history: dict):
+        self.chat_history_on = chat_history["chat_history_on"]
 
 class IntegratedVectorizationConfig:
     def __init__(self, integrated_vectorization_config: dict):
@@ -239,6 +243,16 @@ class ConfigHelper:
             contract_assistant = f.readlines()
 
         return ''.join([str(elem) for elem in contract_assistant])
+
+    @staticmethod
+    @functools.cache
+    def get_default_employee_assistant():
+        employee_file_path = os.path.join(os.path.dirname(__file__), "default_employee_assistant_prompt.txt")
+        employee_assistant = ""
+        with open(employee_file_path, encoding="utf-8") as f:
+            employee_assistant = f.readlines()
+
+        return ''.join([str(elem) for elem in employee_assistant])
 
     @staticmethod
     def clear_config():

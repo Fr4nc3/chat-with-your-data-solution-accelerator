@@ -61,6 +61,8 @@ if "log_user_interactions" not in st.session_state:
     st.session_state["log_user_interactions"] = config.logging.log_user_interactions
 if "log_tokens" not in st.session_state:
     st.session_state["log_tokens"] = config.logging.log_tokens
+if "chat_history_on" not in st.session_state:
+    st.session_state["chat_history_on"] = config.chat_history.chat_history_on
 
 if "orchestrator_strategy" not in st.session_state:
     st.session_state["orchestrator_strategy"] = config.orchestrator.strategy.value
@@ -93,16 +95,18 @@ def validate_answering_user_prompt():
         st.warning("Your answering prompt doesn't contain the variable `{question}`")
 
 
-def config_contract_assistant_prompt():
+def config_assistant_prompt():
     if st.session_state["ai_assistant_type"] == AssistantStrategy.CONTRACT_ASSISTANT.value:
         st.success("Contract Assistant Prompt")
         st.session_state["answering_user_prompt"] = ConfigHelper.get_default_contract_assistant()
+    elif st.session_state["ai_assistant_type"] == AssistantStrategy.EMPLOYEE_ASSISTANT.value:
+        st.success("Employee Assistant Prompt")
+        st.session_state["answering_user_prompt"] = ConfigHelper.get_default_employee_assistant()
     else:
         st.success("Default Assistant Prompt")
         st.session_state["answering_user_prompt"] = (
             ConfigHelper.get_default_assistant_prompt()
         )
-
 
 def validate_post_answering_prompt():
     if (
@@ -217,7 +221,7 @@ try:
             st.selectbox(
                 "Assistant Type",
                 key="ai_assistant_type",
-                on_change=config_contract_assistant_prompt,
+                on_change=config_assistant_prompt,
                 options=config.get_available_ai_assistant_types(),
                 help=ai_assistant_type_help,
             )
@@ -342,6 +346,12 @@ try:
         )
         st.checkbox("Log tokens", key="log_tokens")
 
+    with st.expander("Chat History configuration", expanded=True):
+        st.checkbox(
+            "Turn on Chat History",
+            key="chat_history_on",
+        )
+
     if st.button("Save configuration"):
         document_processors = (
             list(
@@ -394,6 +404,7 @@ try:
                 "log_user_interactions": st.session_state["log_user_interactions"],
                 "log_tokens": st.session_state["log_tokens"],
             },
+            "chat_history": {"chat_history_on": st.session_state["chat_history_on"]},
             "orchestrator": {"strategy": st.session_state["orchestrator_strategy"]},
             "integrated_vectorization_config": (
                 integrated_vectorization_config

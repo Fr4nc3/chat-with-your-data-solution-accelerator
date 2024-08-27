@@ -360,6 +360,7 @@ def setup_config_mocking(httpserver: HTTPServer):
                 },
             ],
             "logging": {"log_user_interactions": True, "log_tokens": True},
+            "chat_history": {"chat_history_on": True},
             "orchestrator": {"strategy": "openai_function"},
             "integrated_vectorization_config": None,
         },

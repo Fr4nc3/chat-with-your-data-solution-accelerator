@@ -61,6 +61,7 @@ def config_dict():
             "log_user_interactions": True,
             "log_tokens": True,
         },
+        "chat_history": {"chat_history_on": True},
         "orchestrator": {
             "strategy": "langchain",
         },
@@ -97,6 +98,7 @@ def old_config_dict():
             "log_user_interactions": True,
             "log_tokens": True,
         },
+        "chat_history": {"chat_history_on": True},
         "orchestrator": {
             "strategy": "langchain",
         },
@@ -357,6 +359,13 @@ def test_get_default_contract_assistant():
     assert contract_assistant_prompt is not None
     assert isinstance(contract_assistant_prompt, str)
 
+def test_get_default_employee_assistant():
+    # when
+    employee_assistant_prompt = ConfigHelper.get_default_employee_assistant()
+
+    # then
+    assert employee_assistant_prompt is not None
+    assert isinstance(employee_assistant_prompt, str)
 
 def test_get_document_processors(config_dict: dict):
     # given
