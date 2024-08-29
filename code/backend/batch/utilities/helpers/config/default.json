@@ -138,6 +138,9 @@
     "log_user_interactions": true,
     "log_tokens": true
   },
+  "chat_history": {
+    "chat_history_on": true
+  },
   "orchestrator": {
     "strategy": "${ORCHESTRATION_STRATEGY}"
   }
