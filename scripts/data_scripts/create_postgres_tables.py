@@ -85,7 +85,7 @@ cursor.execute(table_create_command)
 conn.commit()
 
 cursor.execute(
-    "CREATE INDEX search_indexes_embedding_diskann_idx ON search_indexes USING diskann (content_vector vector_cosine_ops);"
+    "CREATE INDEX search_indexes_content_vector_diskann_idx ON search_indexes USING diskann (content_vector vector_cosine_ops);"
 )
 conn.commit()
 
