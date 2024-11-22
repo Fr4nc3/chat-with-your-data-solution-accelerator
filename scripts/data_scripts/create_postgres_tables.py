@@ -82,6 +82,12 @@ table_create_command = """CREATE TABLE IF NOT EXISTS search_indexes(
     content_vector vector(1536)
 );"""
 cursor.execute(table_create_command)
-cursor.close()
 conn.commit()
+
+cursor.execute(
+    "CREATE INDEX search_indexes_embedding_diskann_idx ON search_indexes USING diskann (content_vector vector_cosine_ops);"
+)
+conn.commit()
+
+cursor.close()
 conn.close()
